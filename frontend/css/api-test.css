@@ -1,0 +1,253 @@
+/* API测试页面特定样式 */
+
+/* 页面头部 */
+.page-header {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    margin-bottom: 30px;
+    border-radius: 0 0 20px 20px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 控制面板 */
+.control-panel {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* 广告展示区域 */
+.ad-display-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+}
+
+.ad-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ad-content h2 {
+    color: #212529;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.ad-description {
+    color: #6c757d;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* 视频播放器 */
+.video-player {
+    position: relative;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-player video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 广告统计 */
+.ad-stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: #17a2b8;
+}
+
+.stat-card i {
+    font-size: 24px;
+    color: #17a2b8;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #212529;
+    margin: 5px 0;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 按钮组 */
+.action-buttons-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+/* API信息面板 */
+.api-info {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 40px;
+    border-left: 4px solid #17a2b8;
+}
+
+.api-info h3 {
+    color: #212529;
+    margin-bottom: 15px;
+}
+
+.api-endpoints {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.api-endpoint {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.api-endpoint:last-child {
+    border-bottom: none;
+}
+
+.endpoint-method {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.method-get {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.method-post {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: #dee2e6;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #adb5bd;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .ad-stats-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .action-buttons-group {
+        flex-direction: column;
+    }
+
+    .action-buttons-group button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .ad-stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .api-endpoint {
+        font-size: 12px;
+        word-break: break-all;
+    }
+}

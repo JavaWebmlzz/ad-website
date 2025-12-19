@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告API测试</title>
+
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS文件 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/api-test.css">
+</head>
+<body>
+<!-- 页面头部 -->
+<header class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-code"></i> 广告API测试页面</h1>
+        <p>此页面模拟外部网站如何调用广告API获取和显示广告</p>
+    </div>
+</header>
+
+<main class="container">
+    <!-- 消息提示区域 -->
+    <div id="messageContainer"></div>
+
+    <!-- 控制面板 -->
+    <section class="control-panel">
+        <button id="getAdBtn" class="btn btn-success btn-large">
+            <i class="fas fa-random"></i> 获取随机广告
+        </button>
+        <p style="margin-top: 15px; color: #6c757d; font-size: 14px;">
+            点击按钮从广告服务器获取随机广告内容
+        </p>
+    </section>
+
+    <!-- 广告展示区域 -->
+    <section id="adDisplayContainer" class="ad-display-container" style="display: none;">
+        <div class="ad-content">
+            <h2 id="adTitle">广告标题</h2>
+            <p id="adDescription" class="ad-description">广告描述内容</p>
+
+            <div class="video-player">
+                <video id="adVideo" controls>
+                    您的浏览器不支持视频标签
+                </video>
+                <div class="video-overlay">
+                    <span id="adDuration">15秒</span>
+                </div>
+            </div>
+
+            <div class="ad-stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-eye"></i>
+                    <div class="stat-value" id="viewsCount">0</div>
+                    <div class="stat-label">观看次数</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <div class="stat-value" id="clicksCount">0</div>
+                    <div class="stat-label">点击次数</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-value" id="durationValue">15</div>
+                    <div class="stat-label">广告时长(秒)</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-hashtag"></i>
+                    <div class="stat-value" id="adId">0</div>
+                    <div class="stat-label">广告ID</div>
+                </div>
+            </div>
+
+            <div class="action-buttons-group">
+                <button id="recordClickBtn" class="btn btn-success">
+                    <i class="fas fa-mouse-pointer"></i> 模拟广告点击
+                </button>
+                <button id="getNewAdBtn" class="btn btn-primary">
+                    <i class="fas fa-redo"></i> 获取新广告
+                </button>
+                <button id="copyAdUrlBtn" class="btn btn-secondary">
+                    <i class="fas fa-link"></i> 复制广告链接
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 空状态（初始时显示） -->
+    <section id="emptyState" class="empty-state">
+        <i class="fas fa-ad"></i>
+        <h3>暂无广告显示</h3>
+        <p>点击上方"获取随机广告"按钮开始测试API功能</p>
+    </section>
+
+    <!-- API信息 -->
+    <section class="api-info">
+        <h3><i class="fas fa-code-branch"></i> 可用API端点</h3>
+        <p style="margin-bottom: 15px;">以下是可以调用的广告API接口：</p>
+
+        <div class="api-endpoints">
+            <div class="api-endpoint">
+                <span class="endpoint-method method-get">GET</span>
+                <code>/api/ads/random</code>
+                <span style="color: #6c757d; margin-left: 10px;">获取随机广告</span>
+            </div>
+            <div class="api-endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <code>/api/ads/{id}/view</code>
+                <span style="color: #6c757d; margin-left: 10px;">记录广告观看</span>
+            </div>
+            <div class="api-endpoint">
+                <span class="endpoint-method method-post">POST</span>
+                <code>/api/ads/{id}/click</code>
+                <span style="color: #6c757d; margin-left: 10px;">记录广告点击</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 14px; color: #6c757d;">
+            <p><i class="fas fa-info-circle"></i> API返回JSON格式数据，包含广告标题、描述、视频URL等信息</p>
+        </div>
+    </section>
+</main>
+
+<!-- JavaScript文件 -->
+<script src="js/api-test.js"></script>
+</body>
+</html>
