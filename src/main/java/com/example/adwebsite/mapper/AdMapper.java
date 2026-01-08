@@ -103,4 +103,14 @@ public class AdMapper {
             return ad;
         }
     }
+
+    public List<Advertisement> findByVideoPrefix(String prefix) {
+        String sql = "SELECT * FROM advertisements " +
+                "WHERE is_active = true " +
+                "AND video_url LIKE :likePattern";
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("likePattern", "/uploads/ads/" + prefix + "_%.mp4");
+        return jdbcTemplate.query(sql, params, new AdvertisementRowMapper());
+    }
+
 }

@@ -253,7 +253,6 @@ const adManager = {
     },
 
     // 复制API链接
-    // 复制API链接
     // copyApiUrl: (id) => {
     //     // const apiUrl = `http://localhost:8080/api/ads/random`;
     //     const apiUrl = `/api/ads/random`;
@@ -270,30 +269,78 @@ const adManager = {
     //         utils.showMessage('API链接已复制', 'info');
     //     });
     // }
-    copyApiUrl: (id) => {
-        const apiUrl = `/api/ads/random`;
+    copyApiUrl(id) {   // 把 id 当参数传进来
+        // const apiUrl = `${location.origin}/api/ads/${id}`;
+        // // 下面降级复制逻辑完全不变
+        // const textArea = document.createElement('textarea');
+        // textArea.value = apiUrl;
+        // textArea.style.position = 'fixed';
+        // textArea.style.left = '-9999px';
+        // document.body.appendChild(textArea);
+        // textArea.focus();
+        // textArea.select();
+        // try {
+        //     const ok = document.execCommand('copy');
+        //     utils.showMessage(ok ? 'API链接已复制' : '复制失败，请手动复制',
+        //         ok ? 'info' : 'warning');
+        // } catch (err) {
+        //     utils.showMessage('复制失败，请手动复制', 'warning');
+        // } finally {
+        //     document.body.removeChild(textArea);
+        // }
 
-        // 直接走降级
-        const textArea = document.createElement('textarea');
-        textArea.value = apiUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
+        // fetch(`/api/ads/${id}`)
+        //     .then(res => res.json())
+        //     .then(ad => {
+        //         const videoUrl = ad.videoFullUrl;   // 真正的播放地址
+        //         // 下面降级复制代码完全不变
+        //         const textArea = document.createElement('textarea');
+        //         textArea.value = videoUrl;
+        //         textArea.style.position = 'fixed';
+        //         textArea.style.left = '-9999px';
+        //         document.body.appendChild(textArea);
+        //         textArea.focus();
+        //         textArea.select();
+        //         try {
+        //             const ok = document.execCommand('copy');
+        //             utils.showMessage(ok ? '视频链接已复制' : '复制失败，请手动复制',
+        //                 ok ? 'info' : 'warning');
+        //         } catch (err) {
+        //             utils.showMessage('复制失败，请手动复制', 'warning');
+        //         } finally {
+        //             document.body.removeChild(textArea);
+        //         }
+        //     })
+        //     .catch(() => utils.showMessage('获取地址失败', 'error'));
 
-        try {
-            // 兼容大部分主流浏览器
-            const ok = document.execCommand('copy');
-            utils.showMessage(ok ? 'API链接已复制' : '复制失败，请手动复制',
-                ok ? 'info' : 'warning');
-        } catch (err) {
-            utils.showMessage('复制失败，请手动复制', 'warning');
-        } finally {
-            document.body.removeChild(textArea);
-        }
+        // 1. 先向后端要完整视频地址
+        axios.get(`/api/ads/${id}`)
+            .then(res => {
+                const videoUrl = res.data.videoFullUrl; // 真正的播放地址
+                // 2. 降级复制
+                const textArea = document.createElement('textarea');
+                textArea.value = videoUrl;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    const ok = document.execCommand('copy');
+                    utils.showMessage(ok ? '视频链接已复制' : '复制失败，请手动复制',
+                        ok ? 'info' : 'warning');
+                } catch (err) {
+                    utils.showMessage('复制失败，请手动复制', 'warning');
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            })
+            .catch(() => utils.showMessage('获取地址失败', 'error'));
+
     }
+
 };
+
 
 // 事件监听器
 const setupEventListeners = () => {

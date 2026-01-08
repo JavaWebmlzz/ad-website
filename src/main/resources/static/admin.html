@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告管理后台</title>
+
+    <!-- 字体图标 (使用Font Awesome CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS文件 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<!-- 头部区域 -->
+<header>
+    <div class="container">
+        <h1><i class="fas fa-ad"></i> 广告管理后台</h1>
+        <p>管理您的视频广告内容和统计数据</p>
+    </div>
+</header>
+
+<!-- 主内容区域 -->
+<main class="container">
+    <!-- 消息提示区域 -->
+    <div id="messageContainer"></div>
+
+    <!-- 添加广告区域 -->
+    <section class="section">
+        <h2><i class="fas fa-plus-circle"></i> 添加新广告</h2>
+        <form id="adForm">
+            <div class="form-group">
+                <label for="title"><i class="fas fa-heading"></i> 广告标题 *</label>
+                <input type="text" id="title" placeholder="请输入广告标题" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description"><i class="fas fa-align-left"></i> 广告描述</label>
+                <textarea id="description" placeholder="请输入广告描述" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="videoFile"><i class="fas fa-video"></i> 视频文件 *</label>
+                <input type="file" id="videoFile" accept="video/mp4,video/webm,video/ogg" required>
+                <small style="color: #6c757d;">支持格式：MP4, WebM, OGG，最大50MB</small>
+            </div>
+
+            <div class="form-group">
+                <label for="duration"><i class="fas fa-clock"></i> 广告时长（秒）</label>
+                <input type="number" id="duration" value="15" min="5" max="60" step="1">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> 上传广告
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- 广告列表区域 -->
+    <section class="section">
+        <h2><i class="fas fa-list"></i> 广告列表</h2>
+        <div class="ad-controls">
+            <button id="refreshBtn" class="btn btn-primary btn-sm">
+                <i class="fas fa-sync-alt"></i> 刷新列表
+            </button>
+        </div>
+
+        <div id="loadingIndicator" style="text-align: center; padding: 30px;">
+            <div class="loading"></div>
+            <p style="margin-top: 10px; color: #6c757d;">正在加载广告列表...</p>
+        </div>
+
+        <div id="adList" class="ad-list">
+            <!-- 广告列表将通过JS动态加载 -->
+        </div>
+
+        <div id="emptyState" style="display: none; text-align: center; padding: 40px;">
+            <i class="fas fa-ad" style="font-size: 48px; color: #dee2e6; margin-bottom: 20px;"></i>
+            <h3 style="color: #6c757d; margin-bottom: 10px;">暂无广告</h3>
+            <p style="color: #adb5bd;">点击上方"添加新广告"按钮创建第一个广告</p>
+        </div>
+    </section>
+</main>
+
+<!-- JavaScript文件 -->
+<script src="js/admin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 // AdService.java
 package com.example.adwebsite.service;
 
+import com.example.adwebsite.dto.AdvertisementVo;
 import com.example.adwebsite.entity.Advertisement;
 import java.util.List;
 
@@ -13,4 +14,10 @@ public interface AdService {
     Advertisement getRandomAd();
     void recordView(Integer id);
     void recordClick(Integer id);
+
+    AdvertisementVo getAdVoById(Integer id);
+
+    AdvertisementVo getRandomAdVo();
+
+    List<AdvertisementVo> getAdsByVideoPrefix(String prefix, int limit);
 }

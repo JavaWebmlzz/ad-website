@@ -1,8 +1,11 @@
 // AdminController.java - 管理后台API
 package com.example.adwebsite.controller;
 
+import com.example.adwebsite.dto.AdvertisementVo;
 import com.example.adwebsite.entity.Advertisement;
 import com.example.adwebsite.service.AdService;
+import com.example.adwebsite.service.impl.AdServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,11 +21,13 @@ import java.util.UUID;
 @RequestMapping("/api/admin/ads")
 public class AdminController {
 
-    private final AdService adService;
+    @Autowired
+    private AdServiceImpl adService;   // 注意用实现类才能调到 Vo 方法
+    //private final AdService adService;
     private final String uploadDir = "uploads/ads/";
 
     public AdminController(AdService adService) {
-        this.adService = adService;
+        this.adService = (AdServiceImpl) adService;
         // 创建上传目录
         new File(uploadDir).mkdirs();
     }
@@ -32,10 +37,10 @@ public class AdminController {
         return ResponseEntity.ok(adService.getAllAds());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Advertisement> getAdById(@PathVariable Integer id) {
-        return ResponseEntity.ok(adService.getAdById(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Advertisement> getAdById(@PathVariable Integer id) {
+//        return ResponseEntity.ok(adService.getAdById(id));
+//    }
 
     @PostMapping
     public ResponseEntity<Advertisement> createAd(
@@ -48,7 +53,8 @@ public class AdminController {
         System.out.println(">>> 进入createAd，文件大小=" + videoFile.getSize());
 
         // 保存视频文件
-        String filename = UUID.randomUUID().toString() + "_" + videoFile.getOriginalFilename();
+        //String filename = UUID.randomUUID().toString() + "_" + videoFile.getOriginalFilename();
+        String filename = videoFile.getOriginalFilename();
         Path filePath = Paths.get(uploadDir + filename);
         Files.copy(videoFile.getInputStream(), filePath);
 
@@ -96,5 +102,16 @@ public class AdminController {
     }
 
 
+    // 单条查询 + 完整视频地址
+    @GetMapping("/{id}")
+    public AdvertisementVo getById(@PathVariable Integer id) {
+        return adService.getAdVoById(id);
+    }
+
+    // 随机一条 + 完整视频地址
+    @GetMapping("/random")
+    public AdvertisementVo randomAd() {
+        return adService.getRandomAdVo();
+    }
 }
 

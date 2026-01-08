@@ -12,11 +12,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")          // 所有接口
-                        .allowedOrigins("http://localhost:3000") // 前端地址
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                registry.addMapping("/**")
+                        .allowedOrigins("*")      // 任意域
+                        .allowedMethods("GET","POST","PUT","DELETE")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(false); // 关键：关闭凭据
             }
         };
     }

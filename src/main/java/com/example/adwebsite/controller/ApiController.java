@@ -16,7 +16,7 @@ public class ApiController {
         this.adService = adService;
     }
 
-    @GetMapping("/random")
+    @GetMapping("/admin/random")
     public ResponseEntity<Advertisement> getRandomAd() {
         Advertisement ad = adService.getRandomAd();
         if (ad == null) {
